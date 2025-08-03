@@ -83,6 +83,7 @@ This app is great for:
 ## 🙌 Author
 
 Made with 💻 and ☕ by **Atharva Arjun Patil**
+
 Department : **Computer Engineering**
 
 ---
