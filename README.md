@@ -42,18 +42,7 @@ Just Python. That’s it. No extra modules, no pip installing madness.
 python quiz_app.py
 ```
 
----
 
-## 📸 Screenshots
-
-![Start Screen](https://via.placeholder.com/600x300.png?text=Start+Screen)
-*Welcome page with a glowing start button.*
-
-![Quiz Screen](https://via.placeholder.com/600x300.png?text=Quiz+Screen)
-*Multiple-choice question interface with real-time score.*
-
-![Result Screen](https://via.placeholder.com/600x300.png?text=Results+Screen)
-*Celebrate your Python IQ with a final score.*
 
 ---
 
