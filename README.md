@@ -83,7 +83,6 @@ This app is great for:
 ## 🙌 Author
 
 Made with 💻 and ☕ by **Atharva Arjun Patil**  
-Roll No.: 35  
 Department: Computer Engineering  
 College: [Your College Name Here]
 
