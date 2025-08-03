@@ -83,9 +83,8 @@ This app is great for:
 ## 🙌 Author
 
 Made with 💻 and ☕ by **Atharva Arjun Patil**  
-Department: Computer Engineering  
-College: [Your College Name Here]
-
+Department: Computer Engineering.
+College: Dilkap College [DILKAP].
 ---
 
 ## 📜 License
