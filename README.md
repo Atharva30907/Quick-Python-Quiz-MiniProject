@@ -88,10 +88,3 @@ Department : **Computer Engineering**
 
 ---
 
-## 📜 License
-
-Feel free to copy, modify, learn from, or remix. Just give credits if you vibe with it. 😎
-
----
-
-Want to add features like leaderboard, database integration, or sound effects? DM me — or better, fork and go wild! 💡
