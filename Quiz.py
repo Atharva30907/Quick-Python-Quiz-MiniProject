@@ -1,7 +1,6 @@
 import tkinter as tk
 import random
 
-# Quiz Questions
 questions = [
     ("Who created Python?", ["Guido van Rossum", "Dennis Ritchie", "James Gosling", "Linus Torvalds"], "Guido van Rossum"),
     ("Python is:", ["Low level language", "High level language", "Machine code", "Assembly language"], "High level language"),
@@ -14,107 +13,113 @@ questions = [
     ("Which module gives you access to OS-level commands?", ["math", "sys", "os", "random"], "os"),
     ("What is the correct way to start a for loop?", ["for i = 0 to 5:", "loop i in range(5):", "for i in range(5):", "repeat i to 5"], "for i in range(5):")
 ]
-random.shuffle(questions)  # Randomize question order
-index = 0  # Current question index
-score = 0  # User score
 
-# Functions
-# Start the quiz (hide front page, show questions)
+# Shuffle the questions for randomness
+random.shuffle(questions)
+
+# Initialize index and score
+index = 0  # Current question index
+score = 0  # Total correct answers
+
 def start_quiz():
+    # Hide the welcome screen and show quiz frame
     front_frame.pack_forget()
     quiz_frame.pack()
-    load_question()
+    load_question()  # Load the first question
 
-# Load the current question and display options
 def load_question():
-    q_number_text = f" Question {index + 1} of {len(questions)}:\n\n{questions[index][0]}"
-    question_label.config(text=q_number_text)
-    var.set(None)  # Reset selected option
+    # Display current question and options
+    q_number_text = f"Question {index + 1} of {len(questions)}:\n\n{questions[index][0]}"
+    question_label.config(text=q_number_text)  # Set question text
+    var.set(None)  # Reset radio button selection
     for i in range(4):
+        # Update each radio button's text and value
         buttons[i].config(text=questions[index][1][i], value=questions[index][1][i])
-    score_label.config(text=f"Score: {score}")
+    score_label.config(text=f"Score: {score}")  # Update score label
 
-# Go to the next question and update score
 def next_question():
+    # Go to next question or end quiz
     global index, score
     if var.get() == questions[index][2]:
-        score += 1  # Correct answer
-    index += 1
+        score += 1  # Increase score if answer is correct
+    index += 1  # Move to next question
     if index < len(questions):
-        load_question()
+        load_question()  # Load next question
     else:
-        # Quiz complete
-        question_label.config(text=" 🎉 Quiz Completed! 🎉 ")
-        result_label.config(text=f" You scored {score} out of {len(questions)}")
+        # Quiz is over, show final result
+        question_label.config(text=" Quiz Completed! ")
+        result_label.config(text=f"You scored {score} out of {len(questions)} ")
         for btn in buttons:
-            btn.pack_forget()  # Hide buttons
-        next_btn.pack_forget()
-        score_label.pack_forget()
+            btn.pack_forget()  # Hide options
+        next_btn.pack_forget()  # Hide next button
+        score_label.pack_forget()  # Hide score label
 
-# Main Window Setup
-window = tk.Tk()
-window.title("Atharva's Python Quiz")
-window.geometry("500x550")
-window.configure(bg="#1e1e2f")  # Dark theme background
+window = tk.Tk()  # Create main window
+window.title("Atharva's Python Quiz")  # Window title
+window.geometry("550x600")  # Window size
+window.config(bg="#1e1b2e")  # Background color
 
-# Front Page Frame
-front_frame = tk.Frame(window, bg="#1e1e2f")
+main_bg = "#1e1b2e"       # Background color
+card_bg = "#2b2540"       # Inner card color
+accent_green = "#00ffab"  # Selection and button highlight
+accent_purple = "#c792ea" # Lavender color for theme
+default_text = "#ffffff"   # White text color
 
-# Quiz title
-title_label = tk.Label(front_frame, text="Atharva's Python Quiz", font=("Segoe UI", 20, "bold"),
-                       bg="#1e1e2f", fg="#00e5ff", pady=40)
-title_label.pack()
+front_frame = tk.Frame(window, bg=main_bg)  # Frame for front screen
 
-# Description text
-desc_label = tk.Label(front_frame, text="Test your Python skills",
-                      font=("Segoe UI", 14), bg="#1e1e2f", fg="white", pady=20)
-desc_label.pack()
+# Quiz title label
+tk.Label(front_frame, text="Atharva's Python Quiz", font=("Segoe UI", 22, "bold"),
+         bg=main_bg, fg=accent_green, pady=30).pack()
 
-# Start Quiz button
-start_btn = tk.Button(front_frame, text="Start Quiz", font=("Segoe UI", 14, "bold"),
-                      bg="#00e676", fg="black", padx=20, pady=10, command=start_quiz)
-start_btn.pack()
+# Subtitle
+tk.Label(front_frame, text="Ready to test your Python skills?",
+         font=("Segoe UI", 14), bg=main_bg, fg=default_text).pack(pady=10)
 
-# Show front page
-front_frame.pack(expand=True)
+# Start quiz button
+tk.Button(front_frame, text="Start Quiz", font=("Segoe UI", 14, "bold"),
+          bg=accent_purple, fg="black", padx=25, pady=10,
+          activebackground="#d1aaff", relief="flat", command=start_quiz).pack(pady=20)
 
-# Quiz Frame (hidden until start)
-quiz_frame = tk.Frame(window, bg="#1e1e2f")
+front_frame.pack(expand=True)  # Show front frame
 
-# Question label
-question_label = tk.Label(quiz_frame, text="", font=("Segoe UI", 16, "bold"),
-                          bg="#ffffff", fg="#1e1e2f", wraplength=450, justify="center",
-                          padx=20, pady=20, relief="groove", bd=2)
-question_label.pack(pady=30)
+quiz_frame = tk.Frame(window, bg=main_bg)  # Frame for quiz questions
+
+# Label to show question text
+question_label = tk.Label(quiz_frame, text="", font=("Segoe UI", 15, "bold"),
+                          bg=card_bg, fg=default_text, wraplength=480,
+                          justify="left", padx=15, pady=20, bd=1, relief="solid")
+question_label.pack(pady=25)
 
 # Score display
 score_label = tk.Label(quiz_frame, text="Score: 0", font=("Segoe UI", 12, "bold"),
-                       fg="#00e676", bg="#1e1e2f")
+                       fg=accent_green, bg=main_bg)
 score_label.pack()
 
-# Selected option variable
-var = tk.StringVar()
+# Create radio button options
+var = tk.StringVar()  # Variable to hold selected value
+buttons = []  # List to hold radio buttons
 
-# Option buttons (4 radio buttons)
-buttons = [
-    tk.Radiobutton(quiz_frame, text="", variable=var, value="", font=("Segoe UI", 12),
-                   bg="#ffffff", fg="#1e1e2f", selectcolor="#bbdefb",
-                   width=30, anchor="w", relief="ridge", padx=10)
-    for _ in range(4)]
-
-for btn in buttons:
-    btn.pack(pady=5)
+# Create 4 options
+for _ in range(4):
+    rb = tk.Radiobutton(
+        quiz_frame, text="", variable=var, value="",
+        font=("Segoe UI", 12), bg=card_bg, fg=default_text,
+        selectcolor=accent_green, anchor="w", width=40, padx=15,
+        indicatoron=0, relief="raised", bd=2  # Flat styled buttons with selection
+    )
+    rb.pack(pady=5)
+    buttons.append(rb)  # Add button to list
 
 # Next button
-next_btn = tk.Button(quiz_frame, text="Next", command=next_question,
-                     font=("Segoe UI", 14, "bold"), bg="#2196f3", fg="white",
-                     relief="flat", padx=20, pady=5)
+next_btn = tk.Button(quiz_frame, text="Next", font=("Segoe UI", 13, "bold"),
+                     bg=accent_green, fg="black", padx=20, pady=7,
+                     activebackground="#00e6a4", relief="flat", command=next_question)
 next_btn.pack(pady=20)
 
-# Final result display
-result_label = tk.Label(quiz_frame, text="", font=("Segoe UI", 14, "bold"),
-                        fg="#ffd600", bg="#1e1e2f")
+# Result label shown at the end
+result_label = tk.Label(quiz_frame, text="", font=("Segoe UI", 13, "bold"),
+                        fg=accent_purple, bg=main_bg)
 result_label.pack(pady=10)
 
+# Start the GUI loop
 window.mainloop()
-
